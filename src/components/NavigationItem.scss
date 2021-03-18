@@ -1,0 +1,12 @@
+.nav-item {
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    flex-grow: 1;
+    border: 2px solid white;
+
+    .nav-item-title {
+        text-align: center;
+        color: white;
+    }
+}
