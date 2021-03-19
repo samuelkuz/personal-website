@@ -11,7 +11,7 @@ function AlgorithmVisualizer() {
     const [animations, setAnimations] = useState([]);
     const [bars, setBars] = useState([]);
     const [barsInfo, setBarsInfo] = useState([]);
-    const [size, setSize] = useState(20);
+    const [size, setSize] = useState(10);
     const [width, setWidth] = useState(20);
 
     useEffect(() => {
@@ -56,16 +56,14 @@ function AlgorithmVisualizer() {
                     }, ANIMATION_SPEED);
                     break;
             }
-        } else {
-            console.log(bars);
         }
     }, [animations]);
 
     const initializeWidth = () => {
         // left + right margin in px
-        const marginWidth = 6;
+        const marginWidth = 4;
         // window width / (# of elements + # to account for margin)
-        const newWidth = Math.floor((window.innerWidth * .9) / size);
+        const newWidth = Math.floor((window.innerWidth * .8) / size);
         setWidth(newWidth - marginWidth);
     };
 
@@ -95,7 +93,14 @@ function AlgorithmVisualizer() {
 
     return (
         <div className="algorithm-visualizer-wrapper">
-            <button onClick={handleSort}>Test</button>
+            <div className="sorting-selector-container">
+                <div className="sorting-selector" onClick={randomizeArray}>
+                    Randomize
+                </div>
+                <div className="sorting-selector" onClick={handleSort}>
+                    HeapSort
+                </div>
+            </div>
             <div className="algorithm-bar-wrapper">
                 {
                     bars.map((item, idx) => {

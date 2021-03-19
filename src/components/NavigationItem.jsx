@@ -1,19 +1,20 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 import "./NavigationItem.scss";
 
-function NavigationItem({title}) {
-    const history = useHistory();
+function NavigationItem({
+    title,
+    selectedCallback = null,
+    selected = false,
+}) {
+    const selectedClassName = (selected) ? "nav-item selected" : "nav-item";
 
-    const handleClick = () => {
-        const noSpacesTitle = title.replaceAll(" ", "-");
-
-        history.push(`/${noSpacesTitle}`);
+    const handleSelect = () => {
+        selectedCallback(title);
     };
 
     return (
-        <div className="nav-item" onClick={handleClick}>
+        <div className={selectedClassName} onClick={handleSelect}>
             <div className="nav-item-title">{title}</div>
         </div>
     );

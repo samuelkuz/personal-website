@@ -3,10 +3,21 @@
     width: 50px;
     line-height: 50px;
     flex-grow: 1;
-    border: 2px solid white;
+    color: #5f6368;
+    border-bottom: 2px solid transparent;
+    
+    &.selected {
+        border-bottom-color: #1a73e8;
+    }
+
+    &:hover {
+        cursor: pointer;
+        color: #202124;
+    }
 
     .nav-item-title {
         text-align: center;
-        color: white;
+        font-family: "Google Sans",Arial,Helvetica,sans-serif;
+        letter-spacing: .01562rem;
     }
 }
