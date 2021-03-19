@@ -1,5 +1,14 @@
 .algorithm-visualizer-wrapper {
-    font-size: 100px;
-    text-align: center;
-    word-wrap: break-word;
+    .algorithm-bar-wrapper {
+        margin: auto;
+        width: 90%;
+
+        .algorithm-bar {
+            text-align: center;
+            margin: 0 3px 0 3px;
+            display: inline-block;
+            background-color: lightblue;
+        }
+    }
+
 }
