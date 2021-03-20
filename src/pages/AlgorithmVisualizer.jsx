@@ -5,13 +5,13 @@ import { heapSort } from "../algorithms/HeapSort.js";
 import "./AlgorithmVisualizer.scss";
 
 function AlgorithmVisualizer() {
-    const ANIMATION_SPEED = 50;
+    const ANIMATION_SPEED = 150;
     const MAX_HEIGHT = 500;
 
     const [animations, setAnimations] = useState([]);
     const [bars, setBars] = useState([]);
     const [barsInfo, setBarsInfo] = useState([]);
-    const [size, setSize] = useState(10);
+    const [size, setSize] = useState(5);
     const [width, setWidth] = useState(20);
 
     useEffect(() => {
@@ -68,6 +68,7 @@ function AlgorithmVisualizer() {
     };
 
     const randomizeArray = () => {
+        if (animations.length > 0) return;
         let tempBars = [];
         let tempStyles = [];
         for (let i = 0; i < size; i++) {
@@ -85,7 +86,7 @@ function AlgorithmVisualizer() {
         setBarsInfo(tempStyles);
     };
 
-    const handleSort = () => {
+    const handleHeapSort = () => {
         const tempArr = [ ...bars ];
         const sortingAnimations = heapSort(tempArr);
         setAnimations(sortingAnimations);
@@ -97,7 +98,7 @@ function AlgorithmVisualizer() {
                 <div className="sorting-selector" onClick={randomizeArray}>
                     Randomize
                 </div>
-                <div className="sorting-selector" onClick={handleSort}>
+                <div className="sorting-selector" onClick={handleHeapSort}>
                     HeapSort
                 </div>
             </div>

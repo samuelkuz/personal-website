@@ -10,6 +10,7 @@ function heapSort(arr) {
     for (let i = length - 1; i > 0; i--) {
         animations.push({type : "color", barOneIdx: 0, barTwoIdx: i, color: "red"});
         animations.push({type : "swap", barOneIdx: 0, barTwoIdx: i});
+        animations.push({type: "color", barOneIdx: i, barTwoIdx: i, color: "lightgreen"});
         animations.push({type : "color", barOneIdx: 0, barTwoIdx: i, color: "lightblue"});
         let temp = arr[0];
         arr[0] = arr[i];

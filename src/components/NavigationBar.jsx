@@ -10,6 +10,7 @@ function NavigationBar() {
         {title: "Home", selected: false},
         {title: "Algorithm Visualizer", selected: false},
         {title: "Drone Delivery System", selected: false},
+        {title: "Contact Me", selected: false},
     ]);
 
     useEffect(() => {
