@@ -7,10 +7,10 @@ import "./NavigationBar.scss";
 
 function NavigationBar() {
     const [navItems, setNavItems] = useState([
-        {title: "Home", selected: false},
-        {title: "Algorithm Visualizer", selected: false},
-        {title: "Drone Delivery System", selected: false},
-        {title: "Contact Me", selected: false},
+        {title: "Home", selected: false, redirect: ""},
+        {title: "Algorithm Visualizer", selected: false, redirect: "algorithm-visualizer"},
+        {title: "Drone Delivery System", selected: false, redirect: "drone-delivery-system"},
+        {title: "Contact Me", selected: false, redirect: "contact-me"},
     ]);
 
     useEffect(() => {
@@ -23,37 +23,36 @@ function NavigationBar() {
     const initializeSelect = () => {
         const pageTitle = window.location.href.split("/")[3].replaceAll("-", " ");
         const tempNavItems = JSON.parse(JSON.stringify(navItems));
-        let found = false;
 
-        for (let navItem of tempNavItems) {
-            if (navItem.title.indexOf(pageTitle) !== -1) {
-                navItem.selected = true;
-                found = true;
+        console.log(pageTitle);
+        if (pageTitle === "") {
+            tempNavItems[0].selected = true;
+        } else {
+            for (let navItem of tempNavItems) {
+                if (navItem.title.toLowerCase().indexOf(pageTitle) !== -1) {
+                    navItem.selected = true;
+                }
             }
         }
 
-        if (!found) tempNavItems[0].selected = true;
         setNavItems(tempNavItems);
     };
 
     const handleSelect = (title) => {
-        const noSpacesTitle = title.replaceAll(" ", "-");
         const tempNavItems = JSON.parse(JSON.stringify(navItems));
-        let found = false;
+        let redirect = "";
 
         for (let navItem of tempNavItems) {
             if (navItem.title.indexOf(title) !== -1) {
                 navItem.selected = true;
-                found = true;
+                redirect = navItem.redirect;
             } else {
                 navItem.selected = false;
             }
         }
 
-        if (!found) tempNavItems[0].selected = true;
-
         setNavItems(tempNavItems);
-        history.push(`/${noSpacesTitle}`);
+        history.push(`/${redirect}`);
     };
 
     return (

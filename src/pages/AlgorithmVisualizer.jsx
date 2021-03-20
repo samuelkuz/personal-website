@@ -5,13 +5,13 @@ import { heapSort } from "../algorithms/HeapSort.js";
 import "./AlgorithmVisualizer.scss";
 
 function AlgorithmVisualizer() {
-    const ANIMATION_SPEED = 150;
+    const ANIMATION_SPEED = 50;
     const MAX_HEIGHT = 500;
 
     const [animations, setAnimations] = useState([]);
     const [bars, setBars] = useState([]);
     const [barsInfo, setBarsInfo] = useState([]);
-    const [size, setSize] = useState(5);
+    const [size, setSize] = useState(25);
     const [width, setWidth] = useState(20);
 
     useEffect(() => {
@@ -63,7 +63,7 @@ function AlgorithmVisualizer() {
         // left + right margin in px
         const marginWidth = 4;
         // window width / (# of elements + # to account for margin)
-        const newWidth = Math.floor((window.innerWidth * .8) / size);
+        const newWidth = Math.floor((window.innerWidth * .9) / size);
         setWidth(newWidth - marginWidth);
     };
 
