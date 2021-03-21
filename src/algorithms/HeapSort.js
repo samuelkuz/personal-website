@@ -1,6 +1,5 @@
 function heapSort(arr) {
     const animations = [];
-
     let length = arr.length;
 
     for (let i = Math.floor((length / 2 ) - 1); i >= 0; i--) {
@@ -8,7 +7,7 @@ function heapSort(arr) {
     }
 
     for (let i = length - 1; i > 0; i--) {
-        animations.push({type : "color", barOneIdx: 0, barTwoIdx: i, color: "red"});
+        animations.push({type : "color", barOneIdx: 0, barTwoIdx: i, color: "#ea4335"});
         animations.push({type : "swap", barOneIdx: 0, barTwoIdx: i});
         animations.push({type: "color", barOneIdx: i, barTwoIdx: i, color: "lightgreen"});
         animations.push({type : "color", barOneIdx: 0, barTwoIdx: i, color: "lightblue"});
@@ -36,7 +35,7 @@ function heapify(arr, length, i, animations) {
 
     if (largest !== i) {
         //Highlight
-        animations.push({type : "color", barOneIdx: i, barTwoIdx: largest, color: "red"});
+        animations.push({type : "color", barOneIdx: i, barTwoIdx: largest, color: "#ea4335"});
         [arr[i], arr[largest]] = [arr[largest], arr[i]];
         // Move
         animations.push({type : "swap", barOneIdx: i, barTwoIdx: largest});

@@ -1,23 +1,25 @@
 .nav-item {
-    height: 50px;
-    width: 50px;
-    line-height: 50px;
-    flex-grow: 1;
-    color: #5f6368;
     border-bottom: 2px solid transparent;
+    color: #5f6368;
+    cursor: pointer;
+    flex-grow: 1;
+    height: 50px;
+    line-height: 50px;
+    user-select: none;
+    width: 50px;
+
     
     &.selected {
         border-bottom-color: #1a73e8;
     }
 
     &:hover {
-        cursor: pointer;
         color: #202124;
     }
 
     .nav-item-title {
-        text-align: center;
         font-family: "Google Sans",Arial,Helvetica,sans-serif;
         letter-spacing: .01562rem;
+        text-align: center;
     }
 }
