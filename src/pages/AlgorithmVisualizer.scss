@@ -1,4 +1,15 @@
 .algorithm-visualizer-wrapper {
+    .algorithm-bar-wrapper {
+        margin: auto;
+        width: 90%;
+
+        .algorithm-bar {
+            text-align: center;
+            margin: 0 1px 0 1px;
+            display: inline-block;
+        }
+    }
+    
     .algorithm-selector-container {
         display: flex;
 
@@ -25,6 +36,53 @@
             }
         }
 
+        .settings-selector {
+            background-color: #f8f9fa;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            color: #3c4043;
+            cursor: pointer;
+            font-family: arial,sans-serif;
+            font-size: 14px;
+            margin: 10px auto;
+            line-height: 25px;
+            height: 25px;
+            min-width: 100px;
+            text-align: center;
+            user-select: none;
+            z-index: 20;
+
+            &:hover {
+                box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+                background-color: #f8f9fa;
+                border: 1px solid #a7a7a7;
+                color: #202124;
+            }
+
+            .settings-option {
+                background-color: #f8f9fa;
+                border: 1px solid #dadce0;
+                border-radius: 4px;
+                color: #3c4043;
+                cursor: pointer;
+                font-family: arial,sans-serif;
+                line-height: 25px;
+                height:25px;
+                min-width: 95px;
+                position:relative;
+                text-align: center;
+                user-select: none;
+                z-index: 10;
+    
+                &:hover {
+                    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+                    background-color: #f8f9fa;
+                    border: 1px solid #a7a7a7;
+                    color: #202124;
+                }
+            }
+        }
+
         .input-container {
             margin: 10px auto;
             
@@ -39,17 +97,6 @@
                 border: 1px solid transparent;
                 border-bottom: 1px solid #e8eaed;
             }
-        }
-    }
-    
-    .algorithm-bar-wrapper {
-        margin: auto;
-        width: 90%;
-
-        .algorithm-bar {
-            text-align: center;
-            margin: 0 1px 0 1px;
-            display: inline-block;
         }
     }
 }

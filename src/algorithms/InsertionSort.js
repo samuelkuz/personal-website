@@ -13,7 +13,6 @@ function insertionSort(arr) {
             animations.push({type : "color", barOneIdx: j, barTwoIdx: j + 1, color: "lightblue"});
             j--;
         }
-        animations.push({type : "color", barOneIdx: j + 1, barTwoIdx: j + 1, color: "lightgreen"});
         arr[j + 1] = key;
         animations.push({type : "color", barOneIdx: j + 1, barTwoIdx: j + 1, color: "lightblue"});
     }

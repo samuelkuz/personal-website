@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { binarySearch } from "../algorithms/BinarySearch.js";
 import { bubbleSort } from "../algorithms/BubbleSort.js";
@@ -10,25 +10,31 @@ import { mergeSort } from "../algorithms/MergeSort.js";
 import "./AlgorithmVisualizer.scss";
 
 function AlgorithmVisualizer() {
-    const ANIMATION_SPEED = 50;
     const MAX_HEIGHT = 500;
 
     const [animations, setAnimations] = useState([]);
+    const [animationSpeed, setAnimationSpeed] = useState(25);
     const [bars, setBars] = useState([]);
     const [barsInfo, setBarsInfo] = useState([]);
-    const [size, setSize] = useState(10);
+    const [size, setSize] = useState(25);
     const [width, setWidth] = useState(20);
+    const [showSettings, setShowSettings] = useState(false);
+
+    const node = useRef();
 
     useEffect(() => {
         initializeWidth();
+        // window.addEventListener("mousedown", testEvent)
         return function cleanup() {
+            // window.removeEventListener("mousedown", testEvent);
             console.log("cleaning up");
         }
     }, []);
 
     useEffect(() => {
+        initializeWidth();
         randomizeArray();
-    }, [width]);
+    }, [width, size]);
 
     useEffect(() => {
         if (animations.length > 0) {
@@ -45,7 +51,7 @@ function AlgorithmVisualizer() {
                         tempBarsInfo[barTwoIdx].backgroundColor = color;
                         setBarsInfo(tempBarsInfo);
                         setAnimations(tempAnimations);
-                    }, ANIMATION_SPEED);
+                    }, animationSpeed);
                     break;
                 case "swap":
                     setTimeout(() => {
@@ -58,7 +64,7 @@ function AlgorithmVisualizer() {
                         setBars(tempBars);
                         setBarsInfo(tempBarsInfo);
                         setAnimations(tempAnimations);
-                    }, ANIMATION_SPEED);
+                    }, animationSpeed);
                     break;
                 case "insert":
                     setTimeout(() => {
@@ -71,7 +77,7 @@ function AlgorithmVisualizer() {
                         setBars(tempBars);
                         setBarsInfo(tempBarsInfo);
                         setAnimations(tempAnimations);
-                    }, ANIMATION_SPEED);
+                    }, animationSpeed);
             }
         }
     }, [animations]);
@@ -97,7 +103,7 @@ function AlgorithmVisualizer() {
     const handleInputChange = (e) => {
         switch(e.keyCode) {
             case 13:
-                if (isSorted()) {
+                if (animations.length === 0 && isSorted()) {
                     const tempBarsInfo = JSON.parse(JSON.stringify(barsInfo));
                     for (let barInfo of tempBarsInfo) {
                         barInfo.backgroundColor = "lightblue";
@@ -110,6 +116,16 @@ function AlgorithmVisualizer() {
                 break;
         }
     };
+
+    const handleSettingsChange = (newSize) => {
+        let newAnimationSpeed = 50;
+        if (newSize >= 25) newAnimationSpeed = 25;
+        if (newSize >= 50) newAnimationSpeed = 15;
+        if (newSize >= 100) newAnimationSpeed = 10;
+
+        setAnimationSpeed(newAnimationSpeed);
+        setSize(newSize);
+    }
 
     const handleMergeSort = () => {
         const tempArr = [ ...bars ];
@@ -142,7 +158,6 @@ function AlgorithmVisualizer() {
         } else {
             return false;
         }
-
     };
 
     const randomizeArray = () => {
@@ -163,6 +178,20 @@ function AlgorithmVisualizer() {
         setBars(tempBars);
         setBarsInfo(tempStyles);
     };
+
+    // For some reason showSettings is not being recognized as true
+    // const testEvent = (e) => {
+    //     if (node.current.contains(e.target)) {
+    //         console.log("INSIDE SETTINGS");
+    //         console.log(showSettings);
+    //     } else {
+    //         console.log(showSettings);
+    //         if (showSettings == true) {
+    //             setShowSettings(false);
+    //         }
+    //         console.log("OUTIDE SETTINGS");
+    //     }
+    // };
 
     return (
         <div className="algorithm-visualizer-wrapper">
@@ -188,6 +217,16 @@ function AlgorithmVisualizer() {
                 <div className="input-container">
                     <div className="input-text">Binary Search</div>
                     <input className="input-box" onKeyDown={handleInputChange}></input>
+                </div>
+                <div className="settings-selector" ref={node} onClick={() => {setShowSettings(!showSettings)}}>
+                    Settings
+                    {showSettings &&
+                        <div>
+                            <div className="settings-option" onClick={() => {handleSettingsChange(10)}}>Small</div>
+                            <div className="settings-option" onClick={() => {handleSettingsChange(25)}}>Medium</div>
+                            <div className="settings-option" onClick={() => {handleSettingsChange(50)}}>Large</div>
+                        </div>
+                    }
                 </div>
             </div>
             <div className="algorithm-bar-wrapper">
