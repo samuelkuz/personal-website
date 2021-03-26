@@ -1,0 +1,36 @@
+.header-bar {
+    background-color: #fff;
+    border-bottom: 1px solid #000;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+
+    .header-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        z-index: 1000;
+        font-family: sans-serif;
+        font-size: 19px;
+        font-weight: bold;
+        padding: .6rem 2rem;
+
+        .header-title {
+            cursor: pointer;
+            display: block;
+            padding: .75rem 5rem;
+        }
+
+        .header-link-container {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-end;
+            margin-right: 4rem;
+
+            .header-link-item {
+                cursor: pointer;
+                padding: .75rem 1.5rem;
+            }
+        }
+    }
+}

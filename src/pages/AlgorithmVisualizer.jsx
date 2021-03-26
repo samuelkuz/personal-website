@@ -13,7 +13,7 @@ function AlgorithmVisualizer() {
     const MAX_HEIGHT = 500;
 
     const [animations, setAnimations] = useState([]);
-    const [animationSpeed, setAnimationSpeed] = useState(25);
+    const [animationSpeed, setAnimationSpeed] = useState(20);
     const [bars, setBars] = useState([]);
     const [barsInfo, setBarsInfo] = useState([]);
     const [size, setSize] = useState(25);
@@ -83,18 +83,21 @@ function AlgorithmVisualizer() {
     }, [animations]);
 
     const handleBubbleSort = () => {
+        if (animations.length > 0) return;
         const tempArr = [ ...bars ];
         const sortingAnimations = bubbleSort(tempArr);
         setAnimations(sortingAnimations);
     };
 
     const handleHeapSort = () => {
+        if (animations.length > 0) return;
         const tempArr = [ ...bars ];
         const sortingAnimations = heapSort(tempArr);
         setAnimations(sortingAnimations);
     };
 
     const handleInsertionSort = () => {
+        if (animations.length > 0) return;
         const tempArr = [ ...bars ];
         const sortingAnimations = insertionSort(tempArr);
         setAnimations(sortingAnimations);
@@ -119,24 +122,32 @@ function AlgorithmVisualizer() {
 
     const handleSettingsChange = (newSize) => {
         let newAnimationSpeed = 50;
-        if (newSize >= 25) newAnimationSpeed = 25;
-        if (newSize >= 50) newAnimationSpeed = 15;
-        if (newSize >= 100) newAnimationSpeed = 10;
+        if (newSize >= 25) newAnimationSpeed = 20;
+        if (newSize >= 50) newAnimationSpeed = 10;
+        if (newSize >= 100) newAnimationSpeed = 5;
 
         setAnimationSpeed(newAnimationSpeed);
         setSize(newSize);
     }
 
     const handleMergeSort = () => {
+        if (animations.length > 0) return;
         const tempArr = [ ...bars ];
         const sortingAnimations = mergeSort(tempArr);
         setAnimations(sortingAnimations);
     };
 
     const handleQuickSort = () => {
+        if (animations.length > 0) return;
         const tempArr = [ ...bars ];
         const sortingAnimations = quickSort(tempArr);
         setAnimations(sortingAnimations);
+    };
+
+    const handleRandomize = () => {
+        if (animations.length > 0) return;
+        initializeWidth();
+        randomizeArray();
     };
 
     const initializeWidth = () => {
@@ -161,7 +172,6 @@ function AlgorithmVisualizer() {
     };
 
     const randomizeArray = () => {
-        if (animations.length > 0) return;
         let tempBars = [];
         let tempStyles = [];
         for (let i = 0; i < size; i++) {
@@ -196,7 +206,7 @@ function AlgorithmVisualizer() {
     return (
         <div className="algorithm-visualizer-wrapper">
             <div className="algorithm-selector-container">
-                <div className="sorting-selector" onClick={randomizeArray}>
+                <div className="sorting-selector" onClick={handleRandomize}>
                     Randomize
                 </div>
                 <div className="sorting-selector" onClick={handleBubbleSort}>

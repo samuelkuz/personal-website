@@ -1,5 +1,58 @@
-.home-wrapper {
-    font-size: 100px;
-    text-align: center;
-    word-wrap: break-word;
+.contact-wrapper {
+    .contact-header {
+        border-bottom: 1px solid #d6d6d6;
+        font-family: sans-serif;
+        font-size: 50px;
+        font-weight: 600;
+        margin: 20px auto;
+        text-align: center;
+        width: 525px;
+        word-wrap: break-word;
+    }
+
+    .contact-container {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        width: 100%;
+
+        .contact-item {
+            font-family: sans-serif;
+            font-size: 25px;
+            margin: 0 15px 0;
+            
+            &.clickable {
+                cursor: pointer;
+            }
+        }
+    }
+    
+    .icon-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px auto;
+        width: 100%;
+
+        .icon-item {
+            cursor: pointer;
+            margin: 0 10px 0 10px;
+
+            .icon-image {
+                height: 32px;
+            }
+
+        }
+    }
+
+    .copy-popup {
+        background-color: #e8eaed;
+        border-radius: 10px;
+        line-height: 30px;
+        position: fixed;
+        text-align: center;
+        transition: opacity 3s ease-in-out;
+
+        height: 30px;
+        width: 175px;
+    }
 }
