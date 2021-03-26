@@ -10,9 +10,10 @@
         flex-flow: row nowrap;
         justify-content: space-between;
         z-index: 1000;
-        font-family: sans-serif;
+        color: black;
+        font-family: 'Roboto', sans-serif;
         font-size: 19px;
-        font-weight: bold;
+        font-weight: 700;
         padding: .6rem 2rem;
 
         .header-title {

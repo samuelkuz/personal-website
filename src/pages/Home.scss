@@ -8,7 +8,7 @@
             .head-shot {
                 border: 1px transparent black;
                 border-radius: 250px;
-                margin: 50px 8rem 0 0;
+                margin: 50px 7rem 0 0;
                 width: 250px;
             }
         }
@@ -28,19 +28,57 @@
             .intro-text {
                 font-size: 18px;
                 font-weight: 300;
-                margin: 15px 0 15px 125px;
+                line-height: 25px;
+                margin: 15px 0 5px 125px;
                 max-width: 560px;
             }
         }
     }
 
-    .projects-link {
-        height: 25px;
-        width: 225px;
-        margin-left: 150px;
-        background-color: black;
-        color: white;
+    .copy-email {
+        border-bottom: 1px solid #000;
+        cursor: pointer;
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        margin: 0 0 150px 125px;
+
+        height: 20px;
+        width: 188px;
+        
+        &:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    }
+
+    .copy-popup {
+        background-color: #e8eaed;
+        border-radius: 10px;
+        line-height: 30px;
+        position: fixed;
         text-align: center;
-        line-height: 25px;
+        transition: opacity 3s ease-in-out;
+
+        height: 30px;
+        width: 175px;
+    }
+    
+    .projects-wrapper {
+        .projects-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 0 125px;
+            max-width: 500px;
+        }
+
+        .projects-link {
+            height: 25px;
+            width: 225px;
+            margin: 25px 0 0 125px;
+            background-color: #212529;
+            color: white;
+            text-align: center;
+            line-height: 25px;
+        }
     }
 }
