@@ -1,13 +1,13 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import headshot from "../assets/headshot.JPG";
+import headshot from "../assets/headshot.png";
 
 import "./Home.scss";
 
 function Home() {
     const introTitle = "Hello, I'm Sam - A Software Engineer from Minnesota.";
-    const introText = "I am a newly graduated Computer Science student excited to begin my Software Engineering journey. I’ve developed features for millions of students on the PebbleGo team, worked on creating multiple in-house software applications, and have never been more motivated/excited to learn!";
+    const introText = "I'm a newly graduated Computer Science student excited to begin my Software Engineering journey. I’ve developed features for millions of students on the PebbleGo team, worked on creating multiple in-house software applications, and have never been more motivated/excited to learn!";
 
     const history = useHistory();
 
