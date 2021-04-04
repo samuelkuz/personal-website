@@ -22,7 +22,7 @@ function ContactMe() {
         }, 600);
     };
 
-    const calculateStyle = () => {
+    const calculatePopUpStyle = () => {
         const style = {
             left: emailRef.current.getBoundingClientRect().x + 90,
             top: emailRef.current.getBoundingClientRect().y - 25,
@@ -37,7 +37,7 @@ function ContactMe() {
                 Contact Information
             </div>
             {showCopy &&
-                <div className="copy-popup" style={calculateStyle()}>Copied to clipboard!</div>}
+                <div className="copy-popup" style={calculatePopUpStyle()}>Copied to clipboard!</div>}
             <div className="contact-container">
                 <div className="contact-item clickable" ref={emailRef} onClick={() => handleCopy()}>{emailInfo}</div>
                 <div className="contact-item">{phoneInfo}</div>

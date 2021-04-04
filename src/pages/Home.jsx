@@ -25,7 +25,6 @@ function Home() {
 
     const handleCopy = () => {
         navigator.clipboard.writeText("samuelkuz@gmail.com");
-        console.log(emailRef.current.getBoundingClientRect());
         setShowCopy(true);
         setTimeout(() => {
             setShowCopy(false);
