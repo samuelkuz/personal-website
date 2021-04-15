@@ -7,6 +7,7 @@ import ContactMe from "./pages/ContactMe.jsx";
 import DroneDeliverySystem from "./pages/DroneDeliverySystem.jsx";
 import HeaderBar from "./components/HeaderBar.jsx";
 import Home from "./pages/Home.jsx";
+import GraphVisualizer from "./pages/GraphVisualizer.jsx";
 import NavigationBar from "./components/NavigationBar.jsx";
 
 import './App.scss';
@@ -22,6 +23,7 @@ function App() {
 			<Switch>
 				<Route path="/drone-delivery-system" component={DroneDeliverySystem}/>
 				<Route path="/algorithm-visualizer" component={AlgorithmVisualizer}/>
+				<Route path="/graph-visualizer" component={GraphVisualizer}/>
 				<Route path="/contact-me" component={ContactMe}/>
 				<Route path="/" component={Home}/>
 			</Switch>
