@@ -7,7 +7,7 @@ import GraphNode from "../components/GraphNode";
 
 import dijkstra from "../algorithms/Dijkstra";
 import kosaraju from "../algorithms/Kosaraju";
-// import topologicalSort from "../algorithms/TopologicalSort";
+import topologicalSort from "../algorithms/TopologicalSort";
 
 import "./GraphVisualizer.scss";
 
@@ -191,7 +191,7 @@ function GraphVisualizer({height, width}) {
         return (
             <div className="algorithm-selector-container">
                 <AlgorithmDropDown title={"Dijkstra's"} algorithmCallback={handleDijkstra}/>
-                <AlgorithmButton title={"Topological Sort"} callBack={handleDijkstra}/>
+                <AlgorithmButton title={"Topological Sort"} callBack={handleTopologicalSort}/>
                 <AlgorithmButton title={"Kosaraju"} callBack={handleKosaraju}/>
                 <AlgorithmButton title={"Reset ID's"} callBack={handleReset}/>
             </div>);
@@ -392,10 +392,10 @@ function GraphVisualizer({height, width}) {
         setRenderCount(renderCount + 1);
     };
 
-    // const handleTopologicalSort = () => {
-    //     const tempAnimations = topologicalSort(nodeMap, edgeMap);
-    //     setAnimations(tempAnimations);
-    // };
+    const handleTopologicalSort = () => {
+        const tempAnimations = topologicalSort(nodeMap, edgeMap);
+        setAnimations(tempAnimations);
+    };
 
     const transposeEdge = (edgeId) => {
         const edge = edgeMap.get(edgeId);
