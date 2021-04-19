@@ -26,8 +26,20 @@ function Home() {
                     <img className="head-shot" src={headshot} alt="Headshot" />
                 </div>
             </div>
-            <div className="projects-link" onClick={() => handleRedirect("algorithm-visualizer")}>
-                CLICK HERE FOR PROJECTS!
+            <div className="projects-title">
+                Projects
+            </div>
+            <div className="projects-container">
+                <div className="projects-link" onClick={() => handleRedirect("algorithm-visualizer")}>
+                    <div className="projects-link-text">
+                        Sorting Algorithm Visualizer
+                    </div>
+                </div>
+                <div className="projects-link" onClick={() => handleRedirect("graph-visualizer")}>
+                    <div className="projects-link-text">
+                        Graph Algorithm Visualizer
+                    </div>
+                </div>
             </div>
         </div>
     );

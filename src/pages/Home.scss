@@ -1,22 +1,24 @@
 .home-wrapper {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+
     .intro-container {
         display: flex;
         flex-flow: row nowrap;
-        justify-content: space-between;
+        justify-content: space-around;
 
         .head-wrapper {    
             .head-shot {
                 border: 1px transparent black;
                 border-radius: 250px;
-                margin: 50px 8rem 0 0;
+                margin: 50px 125px 0 0;
                 width: 250px;
             }
         }
     
         .intro-wrapper {
             color: #212529;
-            font-family: 'Roboto', sans-serif;
-            width: 100%;
+            width: 700px;
     
             .intro-title {
                 font-size: 34px;
@@ -29,18 +31,38 @@
                 font-size: 18px;
                 font-weight: 300;
                 margin: 15px 0 15px 125px;
-                max-width: 560px;
+                width: 560px;
             }
         }
     }
 
-    .projects-link {
-        height: 25px;
-        width: 225px;
-        margin-left: 150px;
-        background-color: black;
-        color: white;
-        text-align: center;
-        line-height: 25px;
+    .projects-title {
+        border-bottom: 1px solid #5e5e5e;
+        color: #212529;
+        font-size: 48px;
+        font-weight: 500;
+        margin: 100px auto 50px;
+        width: 200px;
+    }
+
+    .projects-container {
+        display: flex;
+        justify-content: space-evenly;
+
+        .projects-link {
+            background-color: #eeeeee;
+            border: 1px solid black;
+            color: #212529;
+            flex-grow: 2;
+            height: 300px;
+            max-width: 300px;
+
+            .projects-link-text {
+                font-size: 30px;
+                font-weight: 500;
+                margin-top: 100px;
+
+            }
+        }
     }
 }

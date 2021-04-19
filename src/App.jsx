@@ -16,16 +16,16 @@ function App() {
 	return (
 		<Router>
 			<div className="App">
-				<HeaderBar/>
 				<div className="white-space"></div>
-				<Switch>
-					<Route path="/drone-delivery-system" component={DroneDeliverySystem}/>
-					<Route path="/algorithm-visualizer" component={AlgorithmVisualizer}/>
-					<Route path="/graph-visualizer" component={GraphVisualizer}/>
-					<Route path="/contact-me" component={ContactMe}/>
-					<Route path="/" component={Home}/>
-				</Switch>
 			</div>
+			<HeaderBar/>
+			<Switch>
+				<Route path="/drone-delivery-system" component={DroneDeliverySystem}/>
+				<Route path="/algorithm-visualizer" component={AlgorithmVisualizer}/>
+				<Route path="/graph-visualizer" component={GraphVisualizer}/>
+				<Route path="/contact-me" component={ContactMe}/>
+				<Route path="/" component={Home}/>
+			</Switch>
 		</Router>
 	);
 }
