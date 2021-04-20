@@ -8,7 +8,6 @@ import DroneDeliverySystem from "./pages/DroneDeliverySystem.jsx";
 import HeaderBar from "./components/HeaderBar.jsx";
 import Home from "./pages/Home.jsx";
 import GraphVisualizer from "./pages/GraphVisualizer.jsx";
-import NavigationBar from "./components/NavigationBar.jsx";
 
 import './App.scss';
 
@@ -26,6 +25,7 @@ function App() {
 				<Route path="/contact-me" component={ContactMe}/>
 				<Route path="/" component={Home}/>
 			</Switch>
+			<BottomBar/>
 		</Router>
 	);
 }

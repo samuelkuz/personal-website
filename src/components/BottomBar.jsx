@@ -11,7 +11,7 @@ function BottomBar() {
     
     return (
         <div className="bottom-bar-container">
-            <img className="github-icon" src={github_icon} alt="github" />
+            {/* <img className="github-icon" src={github_icon} alt="github" /> */}
         </div>
     );
 }
