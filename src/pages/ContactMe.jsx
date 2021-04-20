@@ -42,14 +42,6 @@ function ContactMe() {
                 <div className="contact-item clickable" ref={emailRef} onClick={() => handleCopy()}>{emailInfo}</div>
                 <div className="contact-item">{phoneInfo}</div>
             </div>
-            <div className="icon-container">
-                <div className="icon-item" onClick={() => window.open("https://github.com/samuelkuz")}>
-                    <img className="icon-image" src={github_icon_large} alt="github" />
-                </div>
-                <div className="icon-item" onClick={() => window.open("https://www.linkedin.com/in/samuel-kuznia-698bb8157/")}>
-                    <img className="icon-image" src={linkedin} alt="github" />
-                </div>
-            </div>
         </div>
     );
 }
