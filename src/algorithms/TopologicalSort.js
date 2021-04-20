@@ -35,7 +35,7 @@ const topologicalSort = (nodes, edges) => {
     });
 
     graph.forEach((node, key) => {
-        if (node.inDegree == 0) {
+        if (node.inDegree === 0) {
             queue.push(node);
             animations.push({
                 id: node.id,
@@ -66,7 +66,7 @@ const topologicalSort = (nodes, edges) => {
                 if (destNode !== undefined) {
                     destNode.inDegree = destNode.inDegree - 1;
                     
-                    if (destNode.inDegree == 0) {
+                    if (destNode.inDegree === 0) {
                         animations.push({
                             id: destNode.id,
                             type: "all",
@@ -81,7 +81,16 @@ const topologicalSort = (nodes, edges) => {
         }
     }
 
-    if (sorted.length !== nodeCount) console.log("ERROR: UNABLE TO BE FULLY BUILT, CYCLE DETECTED");
+    if (sorted.length !== nodeCount) {
+        console.log("ERROR: UNABLE TO BE FULLY BUILT, CYCLE DETECTED");
+        animations.push({
+            id: 0,
+            type: "topologicalError",
+            color: "red",
+            name: "ERROR: Could not Topologically Sort, Cycle detected.",
+            edgeId: "",
+        });
+    }
 
     return animations;
 }

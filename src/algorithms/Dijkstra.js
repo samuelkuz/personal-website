@@ -37,7 +37,7 @@ const priorityQueue = () => {
         },
 
         pop: () => {
-            if (heap.length == 0) return null;
+            if (heap.length === 0) return null;
 
             swap(0, heap.length - 1);
             const item = heap.pop();

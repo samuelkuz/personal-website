@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 
 import github_icon_large from "../assets/github_icon_large.png";
 import linkedin from "../assets/linkedin.png";

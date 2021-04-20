@@ -24,9 +24,7 @@ function AlgorithmVisualizer() {
 
     useEffect(() => {
         initializeWidth();
-        // window.addEventListener("mousedown", testEvent)
         return function cleanup() {
-            // window.removeEventListener("mousedown", testEvent);
             console.log("cleaning up");
         }
     }, []);
@@ -117,6 +115,8 @@ function AlgorithmVisualizer() {
                     setAnimations(binarySearchAnimations);
                 }
                 break;
+            default:
+                return;
         }
     };
 
@@ -191,20 +191,6 @@ function AlgorithmVisualizer() {
         setBars(tempBars);
         setBarsInfo(tempStyles);
     };
-
-    // For some reason showSettings is not being recognized as true
-    // const testEvent = (e) => {
-    //     if (node.current.contains(e.target)) {
-    //         console.log("INSIDE SETTINGS");
-    //         console.log(showSettings);
-    //     } else {
-    //         console.log(showSettings);
-    //         if (showSettings == true) {
-    //             setShowSettings(false);
-    //         }
-    //         console.log("OUTIDE SETTINGS");
-    //     }
-    // };
 
     return (
         <div className="algorithm-visualizer-wrapper">

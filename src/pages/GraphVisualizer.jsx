@@ -27,6 +27,7 @@ function GraphVisualizer({height, width}) {
     const [showAddNode, _setShowAddNode] = useState(false);
     const [showEditEdge, _setShowEditEdge] = useState(false);
     const [showEditNode, _setShowEditNode] = useState(false);
+    const [showTopologicalError, setShowTopologicalError] = useState(false);
     const [svgAddNodePoint, setSvgAddNodePoint] = useState({x: 0, y: 0});
     const [viewPt, _setViewPt] = useState({x: 0, y: 0});
     const [zoom, _setZoom] = useState(150);
@@ -117,6 +118,12 @@ function GraphVisualizer({height, width}) {
                         setAnimations(tempAnimations);
                     }, animationSpeed);
                     break;
+                case "topologicalError":
+                    setTimeout(() => {
+                        setShowTopologicalError(true);
+                        setAnimations(tempAnimations);
+                    }, animationSpeed);
+                    break;
             }
         }
     }, [animations]);
@@ -196,6 +203,25 @@ function GraphVisualizer({height, width}) {
         return edgeObjs;
     };
 
+    const buildGraphSettings = () => {
+        return (
+            <div className="graph-settings-container">
+                <div className="graph-settings-item">
+                    {`MouseClick => Add/Edit Nodes and Edges`}
+                </div>
+                <div className="graph-settings-item">
+                    {`Arrow Keys => Moves Viewpoint`}
+                </div>
+                <div className="graph-settings-item">
+                    {`Key Z => Zooms In`}
+                </div>
+                <div className="graph-settings-item">
+                    {`Key X => Zooms Out`}
+                </div>
+            </div>
+        );
+    };
+
     const buildNodes = () => {
         const nodeObjs = [];
         nodeMap.forEach((val, key) => {
@@ -259,7 +285,7 @@ function GraphVisualizer({height, width}) {
             size: 10,
         };
 
-        console.log("NODE PT: ", newNode.point);
+        // console.log("NODE PT: ", newNode.point);
 
         nodeMap.set(nextId, newNode);
         setNodeCounter(nextId);
@@ -279,7 +305,6 @@ function GraphVisualizer({height, width}) {
                     const srcPoint = srcNode.point;
                     const destPoint = destNode.point;
                     const weight = Math.sqrt(Math.pow(srcPoint.x - destPoint.x, 2) + Math.pow(srcPoint.y - destPoint.y, 2));
-                    console.log("weight is: ", weight);
                     const edgeData = {srcId: srcId, destId: destId, srcPoint: srcPoint, destPoint: destPoint, weight: weight};
 
                     edgeMap.set(edgeKey, edgeData);
@@ -289,6 +314,15 @@ function GraphVisualizer({height, width}) {
             }
         }
     }
+
+    const handleClear = () => {
+        nodeMap.clear();
+        edgeMap.clear();
+
+        setShowTopologicalError(false);
+        setEdgeCounter(0);
+        setNodeCounter(0);
+    };
 
     const handleClick = (e) => {
         if (svgRef.current !== null) {
@@ -381,21 +415,25 @@ function GraphVisualizer({height, width}) {
             // Up
             case "ArrowUp":
                 temp.y -= 10;
+                e.preventDefault();
                 setViewPt(temp);
                 break;
             // Down
             case "ArrowDown":
                 temp.y += 10;
+                e.preventDefault();
                 setViewPt(temp);
                 break;
             // Right
             case "ArrowRight":
                 temp.x += 10;
+                e.preventDefault();
                 setViewPt(temp);
                 break;
             // Left
             case "ArrowLeft":
                 temp.x -= 10;
+                e.preventDefault();
                 setViewPt(temp);
                 break;
             case "KeyZ":
@@ -404,15 +442,17 @@ function GraphVisualizer({height, width}) {
             case "KeyX":
                 setZoom(zoomRef.current + 20);
                 break;
+            default:
+                return;
         }
     };
 
-    const handleClear = () => {
-        nodeMap.clear();
-        edgeMap.clear();
-
-        setEdgeCounter(0);
-        setNodeCounter(0);
+    const handleScrollWheel = (e) => {
+        if (e.deltaY > 0) {
+            setZoom(zoomRef.current - 10);
+        } else {
+            setZoom(zoomRef.current + 10);
+        }
     };
 
     const handleResetIds = () => {
@@ -420,6 +460,7 @@ function GraphVisualizer({height, width}) {
             val.color = "#919191";
             val.name = val.id.toString();
         });
+        setShowTopologicalError(false);
         setRenderCount(renderCount + 1);
     };
 
@@ -448,7 +489,12 @@ function GraphVisualizer({height, width}) {
     return (
         <div className="map-wrapper">
             { buildSettings() }
-            <svg className="map" viewBox={`${viewPt.x} ${viewPt.y} ${zoom} ${zoom}`} ref={svgRef}>
+            {showTopologicalError &&
+                <div className="topological-error">
+                    ERROR: Could not fully Topological Sort graph due to a found cycle.
+                </div>
+            }
+            <svg className="map" viewBox={`${viewPt.x} ${viewPt.y} ${zoom} ${zoom}`} ref={svgRef} onWheel={e => handleScrollWheel(e)}>
                 {buildEdges()}
                 {buildNodes()}
             </svg>
@@ -461,6 +507,8 @@ function GraphVisualizer({height, width}) {
             {showEditEdge &&
                 buildEditEdge()
             }
+            <div className="graph-settings-title">Controls</div>
+            {buildGraphSettings()}
         </div>
     );
 }

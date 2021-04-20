@@ -1,4 +1,5 @@
 .map-wrapper {
+    font-family: arial,sans-serif;
     margin: auto;
     text-align: center;
     height: 100%;
@@ -134,7 +135,6 @@
             background-color: #9c9c9c;
             border-radius: 5px;
             cursor: pointer;
-            font-family: arial,sans-serif;
             font-weight: 500;
             margin: 3px auto;
             text-align: center;
@@ -155,7 +155,6 @@
             border: 1px solid #dadce0;
             border-radius: 4px;
             color: #3c4043;
-            font-family: arial,sans-serif;
             font-size: 14px;
             margin: 10px auto;
             line-height: 25px;
@@ -171,6 +170,34 @@
                 border: 1px solid #a7a7a7;
                 color: #202124;
             }
+        }
+    }
+
+    .topological-error {
+        margin-bottom: 10px;
+        font-size: 28px;
+        color: #ac0000;
+    }
+
+    .graph-settings-title {
+        border-bottom: 1px solid #212529;
+        color: #212529;
+        font-size: 28px;
+        margin: 10px auto;
+        width: 110px;
+    }
+
+    .graph-settings-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        margin: auto;
+
+        .graph-settings-item {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #212529;
+            font-size: 20px;
+            margin: 5px 15px 25px;;
         }
     }
 }
