@@ -145,7 +145,10 @@ function AlgorithmVisualizer() {
     };
 
     const handleRandomize = () => {
-        if (animations.length > 0) return;
+        if (animations.length > 0) {
+            window.location.reload();
+            return;
+        }
         initializeWidth();
         randomizeArray();
     };

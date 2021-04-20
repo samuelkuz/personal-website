@@ -27,7 +27,7 @@ function Home() {
                 </div>
             </div>
             <div className="projects-title">
-                Projects
+                Hosted Projects
             </div>
             <div className="projects-container">
                 <div className="projects-link" onClick={() => handleRedirect("algorithm-visualizer")}>

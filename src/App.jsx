@@ -25,7 +25,7 @@ function App() {
 				<Route path="/contact-me" component={ContactMe}/>
 				<Route path="/" component={Home}/>
 			</Switch>
-			<BottomBar/>
+			{/* <BottomBar/> */}
 		</Router>
 	);
 }

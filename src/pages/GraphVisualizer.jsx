@@ -36,21 +36,40 @@ function GraphVisualizer({height, width}) {
         window.addEventListener("click", handleClick);
 
         // Data to start and toy around with
-        nodeMap.set(1, {id: 1, color: "#919191", name: "1", point: {x: 10, y: 10}, size: 10});
-        nodeMap.set(2, {id: 2, color: "#919191", name: "2", point: {x: 30, y: 30}, size: 10});
-        nodeMap.set(3, {id: 3, color: "#919191", name: "3", point: {x: 60, y: 30}, size: 10});
-        nodeMap.set(4, {id: 4, color: "#919191", name: "4", point: {x: 100, y: 40}, size: 10});
-        nodeMap.set(5, {id: 5, color: "#919191", name: "5", point: {x: 40, y: 100}, size: 10});
-        nodeMap.set(6, {id: 6, color: "#919191", name: "6", point: {x: 80, y: 75}, size: 10});
-        nodeMap.set(7, {id: 7, color: "#919191", name: "7", point: {x: 90, y: 100}, size: 10});
+        // nodeMap.set(1, {id: 1, color: "#919191", name: "1", point: {x: 10, y: 10}, size: 10});
+        // nodeMap.set(2, {id: 2, color: "#919191", name: "2", point: {x: 30, y: 30}, size: 10});
+        // nodeMap.set(3, {id: 3, color: "#919191", name: "3", point: {x: 60, y: 30}, size: 10});
+        // nodeMap.set(4, {id: 4, color: "#919191", name: "4", point: {x: 100, y: 40}, size: 10});
+        // nodeMap.set(5, {id: 5, color: "#919191", name: "5", point: {x: 40, y: 100}, size: 10});
+        // nodeMap.set(6, {id: 6, color: "#919191", name: "6", point: {x: 80, y: 75}, size: 10});
+        // nodeMap.set(7, {id: 7, color: "#919191", name: "7", point: {x: 90, y: 100}, size: 10});
 
-        edgeMap.set("1:2", {srcId: 1, srcPoint: {x: 10, y: 10}, destId: 2, destPoint: {x: 30, y: 30}, weight: 28.284271247461902});
-        edgeMap.set("2:3", {srcId: 2, srcPoint: {x: 30, y: 30}, destId: 3, destPoint: {x: 60, y: 30}, weight: 30});
-        edgeMap.set("3:4", {srcId: 3, srcPoint: {x: 60, y: 30}, destId: 4, destPoint: {x: 100, y: 40}, weight: 41.23105625617661});
-        edgeMap.set("4:6", {srcId: 4, srcPoint: {x: 100, y: 40}, destId: 6, destPoint: {x: 80, y: 75}, weight: 40.311288741492746});
-        edgeMap.set("6:5", {srcId: 6, srcPoint: {x: 80, y: 75}, destId: 5, destPoint: {x: 40, y: 100}, weight: 47.16990566028302});
-        edgeMap.set("6:7", {srcId: 6, srcPoint: {x: 80, y: 75}, destId: 7, destPoint: {x: 90, y: 100}, weight: 26.92582403567252});
+        // edgeMap.set("1:2", {srcId: 1, srcPoint: {x: 10, y: 10}, destId: 2, destPoint: {x: 30, y: 30}, weight: 28.284271247461902});
+        // edgeMap.set("2:3", {srcId: 2, srcPoint: {x: 30, y: 30}, destId: 3, destPoint: {x: 60, y: 30}, weight: 30});
+        // edgeMap.set("3:4", {srcId: 3, srcPoint: {x: 60, y: 30}, destId: 4, destPoint: {x: 100, y: 40}, weight: 41.23105625617661});
+        // edgeMap.set("4:6", {srcId: 4, srcPoint: {x: 100, y: 40}, destId: 6, destPoint: {x: 80, y: 75}, weight: 40.311288741492746});
+        // edgeMap.set("6:5", {srcId: 6, srcPoint: {x: 80, y: 75}, destId: 5, destPoint: {x: 40, y: 100}, weight: 47.16990566028302});
+        // edgeMap.set("6:7", {srcId: 6, srcPoint: {x: 80, y: 75}, destId: 7, destPoint: {x: 90, y: 100}, weight: 26.92582403567252});
+
+        nodeMap.set(1, {id: 1, color: "#919191", name: "1", point: {x: 20, y: 20}, size: 10});
+        nodeMap.set(2, {id: 2, color: "#919191", name: "2", point: {x: 60, y: 30}, size: 10});
+        nodeMap.set(3, {id: 3, color: "#919191", name: "3", point: {x: 25, y: 60}, size: 10});
+        nodeMap.set(4, {id: 4, color: "#919191", name: "4", point: {x: 64, y: 64}, size: 10});
+        nodeMap.set(5, {id: 5, color: "#919191", name: "5", point: {x: 85, y: 115}, size: 10});
+        nodeMap.set(6, {id: 6, color: "#919191", name: "6", point: {x: 99, y: 74}, size: 10});
+        nodeMap.set(7, {id: 7, color: "#919191", name: "7", point: {x: 42, y: 99}, size: 10});
+
+        edgeMap.set("2:1", {srcId: 2, srcPoint: {x: 60, y: 30}, destId: 1, destPoint: {x: 20, y: 20}, weight: 41.23105625617661});
+        edgeMap.set("1:3", {srcId: 1, srcPoint: {x: 20, y: 20}, destId: 3, destPoint: {x: 25, y: 60}, weight: 40.311288741492746});
+        edgeMap.set("2:3", {srcId: 2, srcPoint: {x: 60, y: 30}, destId: 3, destPoint: {x: 25, y: 60}, weight: 46.09772228646444});
+        edgeMap.set("3:4", {srcId: 3, srcPoint: {x: 25, y: 60}, destId: 4, destPoint: {x: 64, y: 64}, weight: 38.70660694991601});
+        edgeMap.set("4:6", {srcId: 4, srcPoint: {x: 64, y: 64}, destId: 6, destPoint: {x: 99, y: 74}, weight: 36.40054944640259});
+        edgeMap.set("4:7", {srcId: 4, srcPoint: {x: 64, y: 64}, destId: 7, destPoint: {x: 42, y: 99}, weight: 41.340053217188775});
+        edgeMap.set("7:5", {srcId: 7, srcPoint: {x: 42, y: 99}, destId: 5, destPoint: {x: 85, y: 115}, weight: 45.880278987817846});
+        edgeMap.set("6:5", {srcId: 6, srcPoint: {x: 99, y: 74}, destId: 5, destPoint: {x: 85, y: 115}, weight: 43.32435804486894});
+
         
+
         setEdgeCounter(6);
         setNodeCounter(7);
 
@@ -192,8 +211,9 @@ function GraphVisualizer({height, width}) {
             <div className="algorithm-selector-container">
                 <AlgorithmDropDown title={"Dijkstra's"} algorithmCallback={handleDijkstra}/>
                 <AlgorithmButton title={"Topological Sort"} callBack={handleTopologicalSort}/>
-                <AlgorithmButton title={"Kosaraju"} callBack={handleKosaraju}/>
-                <AlgorithmButton title={"Reset ID's"} callBack={handleReset}/>
+                <AlgorithmButton title={"Strongly Connected"} callBack={handleKosaraju}/>
+                <AlgorithmButton title={"Reset to ID's"} callBack={handleResetIds}/>
+                <AlgorithmButton title={"Clear"} callBack={handleClear}/>
             </div>);
     };
 
@@ -239,6 +259,8 @@ function GraphVisualizer({height, width}) {
             size: 10,
         };
 
+        console.log("NODE PT: ", newNode.point);
+
         nodeMap.set(nextId, newNode);
         setNodeCounter(nextId);
         setShowAddNode(false);
@@ -257,6 +279,7 @@ function GraphVisualizer({height, width}) {
                     const srcPoint = srcNode.point;
                     const destPoint = destNode.point;
                     const weight = Math.sqrt(Math.pow(srcPoint.x - destPoint.x, 2) + Math.pow(srcPoint.y - destPoint.y, 2));
+                    console.log("weight is: ", weight);
                     const edgeData = {srcId: srcId, destId: destId, srcPoint: srcPoint, destPoint: destPoint, weight: weight};
 
                     edgeMap.set(edgeKey, edgeData);
@@ -384,7 +407,15 @@ function GraphVisualizer({height, width}) {
         }
     };
 
-    const handleReset = () => {
+    const handleClear = () => {
+        nodeMap.clear();
+        edgeMap.clear();
+
+        setEdgeCounter(0);
+        setNodeCounter(0);
+    };
+
+    const handleResetIds = () => {
         nodeMap.forEach((val, key) => {
             val.color = "#919191";
             val.name = val.id.toString();
