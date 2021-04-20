@@ -6,6 +6,6 @@ This website hosts personal/contact information as well as a couple of my front-
 Built using React, and hosted by Amazon Web Services at: [samuelkuz.com](https://www.samuelkuz.com)
 
 
-Credits to:
+### Credits:
 
 [This](https://www.brianatiyeh.com/) website inspired my design and home page layout, implemented by myself.
