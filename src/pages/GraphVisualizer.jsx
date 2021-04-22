@@ -35,6 +35,7 @@ function GraphVisualizer({height, width}) {
     useEffect(() => {
         window.addEventListener("keydown", handleMovement);
         window.addEventListener("click", handleClick);
+        window.scrollTo(0, 0);
 
         // Data to start and toy around with
         // nodeMap.set(1, {id: 1, color: "#919191", name: "1", point: {x: 10, y: 10}, size: 10});
@@ -68,8 +69,6 @@ function GraphVisualizer({height, width}) {
         edgeMap.set("4:7", {srcId: 4, srcPoint: {x: 64, y: 64}, destId: 7, destPoint: {x: 42, y: 99}, weight: 41.340053217188775});
         edgeMap.set("7:5", {srcId: 7, srcPoint: {x: 42, y: 99}, destId: 5, destPoint: {x: 85, y: 115}, weight: 45.880278987817846});
         edgeMap.set("6:5", {srcId: 6, srcPoint: {x: 99, y: 74}, destId: 5, destPoint: {x: 85, y: 115}, weight: 43.32435804486894});
-
-        
 
         setEdgeCounter(6);
         setNodeCounter(7);
@@ -448,11 +447,11 @@ function GraphVisualizer({height, width}) {
     };
 
     const handleScrollWheel = (e) => {
-        if (e.deltaY > 0) {
-            setZoom(zoomRef.current - 10);
-        } else {
-            setZoom(zoomRef.current + 10);
-        }
+        // if (e.deltaY > 0) {
+        //     setZoom(zoomRef.current - 10);
+        // } else {
+        //     setZoom(zoomRef.current + 10);
+        // }
     };
 
     const handleResetIds = () => {
