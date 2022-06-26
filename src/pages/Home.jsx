@@ -6,8 +6,8 @@ import headshot from "../assets/headshot.png";
 import "./Home.scss";
 
 function Home() {
-    const introTitle = "Hello, I'm Sam - A Software Engineer from Minnesota.";
-    const introText = "I'm a newly graduated Computer Science student excited to begin my Software Engineering journey. I’ve developed features for millions of students on the PebbleGo team, worked on creating multiple in-house software applications, and have never been more motivated/excited to learn!";
+    const introTitle = "Hello, I'm Sam - A Software Engineer";
+    const introText = "I'm currently a Software Development Engineer At Amazon! This website servers two main purposes: to host the two projects listed below, and to host my contact information!";
 
     const history = useHistory();
 
