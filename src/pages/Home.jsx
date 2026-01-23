@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import headshot from "../assets/headshot.png";
 
@@ -9,10 +9,10 @@ function Home() {
     const introTitle = "Hello, I'm Sam - A Software Engineer";
     const introText = "I'm currently a Software Development Engineer At Amazon! This website servers two main purposes: to host the two projects listed below, and to host my contact information! NOTE: I have not updated this site in years.... I will vibecode a better website soon TM";
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleRedirect = (redirect) => {
-        history.push(`/${redirect}`);
+        navigate(`/${redirect}`);
     };
 
     return (

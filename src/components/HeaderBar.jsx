@@ -1,17 +1,17 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./HeaderBar.scss";
 
 function HeaderBar() {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleOpenTab = (url) => {
         window.open(url, '_blank').focus();
     };
 
     const handleRedirect = (redirect) => {
-        history.push(`/${redirect}`);
+        navigate(`/${redirect}`);
     };
 
     return (

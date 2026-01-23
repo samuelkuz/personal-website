@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import NavigationItem from "./NavigationItem.jsx";
 
@@ -7,17 +7,17 @@ import "./NavigationBar.scss";
 
 function NavigationBar() {
     const [navItems, setNavItems] = useState([
-        {title: "Home", selected: false, redirect: ""},
-        {title: "Algorithm Visualizer", selected: false, redirect: "algorithm-visualizer"},
-        {title: "Drone Delivery System", selected: false, redirect: "drone-delivery-system"},
-        {title: "Contact Me", selected: false, redirect: "contact-me"},
+        { title: "Home", selected: false, redirect: "" },
+        { title: "Algorithm Visualizer", selected: false, redirect: "algorithm-visualizer" },
+        { title: "Drone Delivery System", selected: false, redirect: "drone-delivery-system" },
+        { title: "Contact Me", selected: false, redirect: "contact-me" },
     ]);
 
     useEffect(() => {
         initializeSelect();
     }, []);
-    
-    const history = useHistory();
+
+    const navigate = useNavigate();
 
     // Can refactor this to use redux store
     const initializeSelect = () => {
@@ -52,7 +52,7 @@ function NavigationBar() {
         }
 
         setNavItems(tempNavItems);
-        history.push(`/${redirect}`);
+        navigate(`/${redirect}`);
     };
 
     return (
