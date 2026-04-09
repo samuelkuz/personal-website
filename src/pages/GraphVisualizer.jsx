@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 import AlgorithmButton from "../components/AlgorithmButton";
 import AlgorithmDropDown from "../components/AlgorithmDropDown";
@@ -12,6 +13,14 @@ import topologicalSort from "../algorithms/TopologicalSort";
 import "./GraphVisualizer.scss";
 
 function GraphVisualizer({height, width}) {
+    const ADD_NODE_HEIGHT = 72;
+    const ADD_NODE_WIDTH = 112;
+    const EDIT_EDGE_HEIGHT = 96;
+    const EDIT_EDGE_WIDTH = 148;
+    const EDIT_NODE_HEIGHT = 188;
+    const EDIT_NODE_WIDTH = 196;
+    const POPUP_MARGIN = 12;
+
     const [addNodePoint, setAddNodePoint] = useState({x: 0, y: 0});
     const [animations, setAnimations] = useState([]);
     const [animationSpeed, setAnimationSpeed] = useState(200);
@@ -128,6 +137,7 @@ function GraphVisualizer({height, width}) {
     }, [animations]);
 
     const addEdgeInputRef = useRef(null);
+    const containerRef = useRef(null);
     const showEditEdgeRef = useRef(showEditEdge);
     const showEditNodeRef = useRef(showEditNode);
     const svgRef = useRef(null);
@@ -175,7 +185,7 @@ function GraphVisualizer({height, width}) {
             <div className="edit-node-title">Edit Node</div>
             <div className="add-edge-container">
                 <div className="add-edge-title">Edge to:</div>
-                <input className="input-box" ref={addEdgeInputRef}></input>
+                <input className="input-box" placeholder="Node ID" ref={addEdgeInputRef}></input>
             </div>
             <div className="edit-node-submit" onClick={() => handleAddEdge()}>Add Edge</div>
             <div className="edit-node-submit" onClick={() => handleDeleteNode()}>Delete</div>
@@ -196,7 +206,7 @@ function GraphVisualizer({height, width}) {
         const edgeObjs = [];
         edgeMap.forEach((val, key) => {
             // Eventually calculate if it should be rendered or not
-            edgeObjs.push(<Edge key={Math.random() * 10000} data={val} color={"#000"} editCallback={handleEditEdge}/>);
+            edgeObjs.push(<Edge key={Math.random() * 10000} data={val} color={"#35506b"} editCallback={handleEditEdge}/>);
         });
 
         return edgeObjs;
@@ -243,30 +253,40 @@ function GraphVisualizer({height, width}) {
     };
 
     const calculateAddNodeStyle = () => {
-        const style = {
+        return {
             left: addNodePoint.x,
-            top: addNodePoint.y - 25,
+            top: addNodePoint.y,
         };
-
-        return style;
     };
 
     const calculateEditEdgeStyle = () => {
-        const style = {
+        return {
             left: editEdgePoint.x,
             top: editEdgePoint.y,
         };
-
-        return style;  
     };
 
     const calculateEditNodeStyle = () => {
-        const style = {
+        return {
             left: editNodePoint.x,
-            top: editNodePoint.y + 25,
+            top: editNodePoint.y,
         };
+    };
 
-        return style;  
+    const calculatePopupPoint = (clientPoint, popupWidth, popupHeight) => {
+        const containerBounds = containerRef.current?.getBoundingClientRect();
+
+        if (containerBounds === undefined) {
+            return clientPoint;
+        }
+
+        const maxLeft = Math.max(containerBounds.width - popupWidth - POPUP_MARGIN, POPUP_MARGIN);
+        const maxTop = Math.max(containerBounds.height - popupHeight - POPUP_MARGIN, POPUP_MARGIN);
+
+        return {
+            x: Math.min(Math.max(clientPoint.x - containerBounds.left, POPUP_MARGIN), maxLeft),
+            y: Math.min(Math.max(clientPoint.y - containerBounds.top, POPUP_MARGIN), maxTop),
+        };
     };
 
     const handleAddNode = () => {
@@ -342,10 +362,10 @@ function GraphVisualizer({height, width}) {
                 }
 
                 if (!showAddNodeRef.current) {
-                    const clickedPt = {
+                    const clickedPt = calculatePopupPoint({
                         x: e.clientX,
                         y: e.clientY
-                    }
+                    }, ADD_NODE_WIDTH, ADD_NODE_HEIGHT);
     
                     const svgPt = {
                         x: cursorPt.x,
@@ -391,7 +411,7 @@ function GraphVisualizer({height, width}) {
         setShowAddNode(false);
         setShowEditEdge(false);
         setSelectedNode(id);
-        setEditNodePoint(offset);
+        setEditNodePoint(calculatePopupPoint(offset, EDIT_NODE_WIDTH, EDIT_NODE_HEIGHT));
         setShowEditNode(true);
     };
 
@@ -399,7 +419,7 @@ function GraphVisualizer({height, width}) {
         setShowAddNode(false);
         setShowEditNode(false);
         setSelectedEdge(id);
-        setEditEdgePoint(offset);
+        setEditEdgePoint(calculatePopupPoint(offset, EDIT_EDGE_WIDTH, EDIT_EDGE_HEIGHT));
         setShowEditEdge(true);
     };
 
@@ -486,28 +506,52 @@ function GraphVisualizer({height, width}) {
 
 
     return (
-        <div className="map-wrapper">
-            { buildSettings() }
-            {showTopologicalError &&
-                <div className="topological-error">
-                    ERROR: Could not fully Topological Sort graph due to a found cycle.
+        <div className="page-shell graph-page">
+            <section className="visualizer-hero">
+                <div>
+                    <div className="section-kicker">Project Demo</div>
+                    <h1 className="section-title">Graph Algorithm Visualizer</h1>
+                    <p className="section-copy">
+                        Build directed graphs on the fly, then explore pathfinding, topological ordering, and strongly
+                        connected components in a live SVG workspace.
+                    </p>
                 </div>
-            }
-            <svg className="map" viewBox={`${viewPt.x} ${viewPt.y} ${zoom} ${zoom}`} ref={svgRef} onWheel={e => handleScrollWheel(e)}>
-                {buildEdges()}
-                {buildNodes()}
-            </svg>
-            {showAddNode &&
-                buildAddNode()
-            }
-            {showEditNode &&
-                buildEditNode()
-            }
-            {showEditEdge &&
-                buildEditEdge()
-            }
-            <div className="graph-settings-title">Controls</div>
-            {buildGraphSettings()}
+                <div className="visualizer-hero-card surface-card">
+                    <div className="section-kicker">Highlights</div>
+                    <div className="pill-list">
+                        <div className="pill">Dijkstra</div>
+                        <div className="pill">Topological Sort</div>
+                        <div className="pill">Strongly Connected Components</div>
+                        <div className="pill">Pan + Zoom</div>
+                    </div>
+                    <Link className="button-link secondary" to="/projects">
+                        Back to Projects
+                    </Link>
+                </div>
+            </section>
+            <div className="map-wrapper surface-card" ref={containerRef}>
+                { buildSettings() }
+                {showTopologicalError &&
+                    <div className="topological-error">
+                        ERROR: Could not fully Topological Sort graph due to a found cycle.
+                    </div>
+                }
+                <svg className="map" viewBox={`${viewPt.x} ${viewPt.y} ${zoom} ${zoom}`} ref={svgRef} onWheel={e => handleScrollWheel(e)}>
+                    {buildEdges()}
+                    {buildNodes()}
+                </svg>
+                {showAddNode &&
+                    buildAddNode()
+                }
+                {showEditNode &&
+                    buildEditNode()
+                }
+                {showEditEdge &&
+                    buildEditEdge()
+                }
+                <div className="graph-settings-title">Controls</div>
+                {buildGraphSettings()}
+            </div>
         </div>
     );
 }

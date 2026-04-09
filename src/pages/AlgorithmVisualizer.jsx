@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { binarySearch } from "../algorithms/BinarySearch.js";
 import { bubbleSort } from "../algorithms/BubbleSort.js";
@@ -9,8 +10,11 @@ import { mergeSort } from "../algorithms/MergeSort.js";
 
 import "./AlgorithmVisualizer.scss";
 
+const algorithmTags = ["Bubble", "Insertion", "Heap", "Merge", "Quick", "Binary Search"];
+
 function AlgorithmVisualizer() {
     const MAX_HEIGHT = 500;
+    const BAR_GAP = 4;
 
     const [animations, setAnimations] = useState([]);
     const [animationSpeed, setAnimationSpeed] = useState(20);
@@ -21,16 +25,22 @@ function AlgorithmVisualizer() {
     const [showSettings, setShowSettings] = useState(false);
 
     const node = useRef();
+    const barsWrapperRef = useRef(null);
 
     useEffect(() => {
         initializeWidth();
+        const handleResize = () => {
+            initializeWidth();
+        };
+
+        window.addEventListener("resize", handleResize);
+
         return function cleanup() {
-            console.log("cleaning up");
-        }
-    }, []);
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [size]);
 
     useEffect(() => {
-        initializeWidth();
         randomizeArray();
     }, [width, size]);
 
@@ -154,11 +164,9 @@ function AlgorithmVisualizer() {
     };
 
     const initializeWidth = () => {
-        // left + right margin in px
-        const marginWidth = 3;
-        // window width / (# of elements + # to account for margin)
-        const newWidth = Math.floor((window.innerWidth * .9) / size);
-        setWidth(newWidth - marginWidth);
+        const wrapperWidth = barsWrapperRef.current?.clientWidth ?? window.innerWidth * 0.9;
+        const nextWidth = Math.floor((wrapperWidth - (BAR_GAP * (size - 1))) / size);
+        setWidth(Math.max(nextWidth, 8));
     };
 
     const isSorted = () => {
@@ -182,7 +190,7 @@ function AlgorithmVisualizer() {
             const initStyle = {
                 height: `${randomVal}px`,
                 width: `${width}px`,
-                fontSize: `${width/2}px`,
+                fontSize: `${Math.max(width / 2, 10)}px`,
                 backgroundColor: "lightblue",
             }
             tempBars.push(randomVal);
@@ -193,50 +201,75 @@ function AlgorithmVisualizer() {
     };
 
     return (
-        <div className="algorithm-visualizer-wrapper">
-            <div className="algorithm-selector-container">
-                <div className="sorting-selector" onClick={handleRandomize}>
-                    Randomize
+        <div className="page-shell visualizer-page">
+            <section className="visualizer-hero">
+                <div>
+                    <div className="section-kicker">Project Demo</div>
+                    <h1 className="section-title">Sorting Algorithm Visualizer</h1>
+                    <p className="section-copy">
+                        Compare how classic sorting strategies behave in motion, then run a binary search on the sorted
+                        result. The interface is designed to make algorithm behavior feel tangible instead of abstract.
+                    </p>
                 </div>
-                <div className="sorting-selector" onClick={handleBubbleSort}>
-                    BubbleSort
+                <div className="visualizer-hero-card surface-card">
+                    <div className="section-kicker">Included Modes</div>
+                    <div className="pill-list">
+                        {algorithmTags.map((entry) => (
+                            <div key={entry} className="pill">
+                                {entry}
+                            </div>
+                        ))}
+                    </div>
+                    <Link className="button-link secondary" to="/projects">
+                        Back to Projects
+                    </Link>
                 </div>
-                <div className="sorting-selector" onClick={handleInsertionSort}>
-                    InsertionSort
+            </section>
+            <div className="algorithm-visualizer-wrapper surface-card">
+                <div className="algorithm-selector-container">
+                    <div className="sorting-selector" onClick={handleRandomize}>
+                        Randomize
+                    </div>
+                    <div className="sorting-selector" onClick={handleBubbleSort}>
+                        Bubble Sort
+                    </div>
+                    <div className="sorting-selector" onClick={handleInsertionSort}>
+                        Insertion Sort
+                    </div>
+                    <div className="sorting-selector" onClick={handleHeapSort}>
+                        Heap Sort
+                    </div>
+                    <div className="sorting-selector" onClick={handleMergeSort}>
+                        Merge Sort
+                    </div>
+                    <div className="sorting-selector" onClick={handleQuickSort}>
+                        Quick Sort
+                    </div>
+                    <div className="input-container">
+                        <div className="input-text">Binary Search</div>
+                        <input className="input-box" onKeyDown={handleInputChange}></input>
+                    </div>
+                    <div className="settings-selector" ref={node} onClick={() => {setShowSettings(!showSettings)}}>
+                        Settings
+                        {showSettings &&
+                            <div>
+                                <div className="settings-option" onClick={() => {handleSettingsChange(10)}}>Small</div>
+                                <div className="settings-option" onClick={() => {handleSettingsChange(25)}}>Medium</div>
+                                <div className="settings-option" onClick={() => {handleSettingsChange(50)}}>Large</div>
+                            </div>
+                        }
+                    </div>
                 </div>
-                <div className="sorting-selector" onClick={handleHeapSort}>
-                    HeapSort
-                </div>
-                <div className="sorting-selector" onClick={handleMergeSort}>
-                    MergeSort
-                </div>
-                <div className="sorting-selector" onClick={handleQuickSort}>
-                    QuickSort
-                </div>
-                <div className="input-container">
-                    <div className="input-text">Binary Search</div>
-                    <input className="input-box" onKeyDown={handleInputChange}></input>
-                </div>
-                <div className="settings-selector" ref={node} onClick={() => {setShowSettings(!showSettings)}}>
-                    Settings
-                    {showSettings &&
-                        <div>
-                            <div className="settings-option" onClick={() => {handleSettingsChange(10)}}>Small</div>
-                            <div className="settings-option" onClick={() => {handleSettingsChange(25)}}>Medium</div>
-                            <div className="settings-option" onClick={() => {handleSettingsChange(50)}}>Large</div>
-                        </div>
+                <div className="algorithm-bar-wrapper" ref={barsWrapperRef}>
+                    {
+                        bars.map((item, idx) => {
+                            const style = barsInfo[idx];
+                            return (
+                                <div className="algorithm-bar" key={Math.random() * 10000} style={style}>{item}</div>
+                            );
+                        })
                     }
                 </div>
-            </div>
-            <div className="algorithm-bar-wrapper">
-                {
-                    bars.map((item, idx) => {
-                        const style = barsInfo[idx];
-                        return (
-                            <div className="algorithm-bar" key={Math.random() * 10000} style={style}>{item}</div>
-                        );
-                    })
-                }
             </div>
         </div>
     );

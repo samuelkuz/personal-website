@@ -12,7 +12,7 @@ const AlgorithmDropDown = ({algorithmCallback, title}) => {
             <div className="drop-down-container">
                 <div className="drop-down-input-container">
                     <div className="drop-down-input-title">From Node ID:</div>
-                    <input className="drop-down-input-box" ref={startAlgorithmRef}></input>
+                    <input className="drop-down-input-box" placeholder="e.g. 1" ref={startAlgorithmRef}></input>
                 </div>
                 <div className="drop-down-submit" onClick={() => handleStartAlgorithm()}>Start</div>
             </div>

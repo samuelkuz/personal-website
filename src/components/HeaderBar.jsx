@@ -1,30 +1,76 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import CopyToast from "./CopyToast.jsx";
 
 import "./HeaderBar.scss";
 
+const internalLinks = [
+    { label: "Home", to: "/" },
+    { label: "Projects", to: "/projects" },
+    { label: "Contact", to: "/contact" },
+];
+
+const socialLinks = [
+    { label: "GitHub", href: "https://github.com/samuelkuz" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/samuel-kuznia-698bb8157/" },
+];
+
+const EMAIL_ADDRESS = "samuelkuz@gmail.com";
+
 function HeaderBar() {
-    const navigate = useNavigate();
+    const [showToast, setShowToast] = useState(false);
+    const hideToastTimeoutRef = useRef(null);
 
-    const handleOpenTab = (url) => {
-        window.open(url, '_blank').focus();
-    };
-
-    const handleRedirect = (redirect) => {
-        navigate(`/${redirect}`);
+    const handleCopyEmail = async () => {
+        await navigator.clipboard.writeText(EMAIL_ADDRESS);
+        if (hideToastTimeoutRef.current !== null) {
+            window.clearTimeout(hideToastTimeoutRef.current);
+        }
+        setShowToast(true);
+        hideToastTimeoutRef.current = window.setTimeout(() => setShowToast(false), 1400);
     };
 
     return (
-        <div className="header-bar">
-            <div className="header-container">
-                <div className="header-title" onClick={() => handleRedirect("")}>samuel kuz</div>
-                <div className="header-link-container">
-                    <div className="header-link-item" onClick={() => handleOpenTab("https://github.com/samuelkuz/personal-website")}>github</div>
-                    <div className="header-link-item" onClick={() => handleOpenTab("https://www.linkedin.com/in/samuel-kuznia-698bb8157/")}>linkedin</div>
-                    <div className="header-link-item" onClick={() => handleRedirect("contact-me")}>contact me</div>
+        <>
+            <header className="site-header">
+                <div className="site-header-inner surface-card">
+                    <NavLink className="site-brand" to="/">
+                        <span className="brand-mark"></span>
+                        <span>Sam</span>
+                    </NavLink>
+                    <nav className="site-nav" aria-label="Primary navigation">
+                        {internalLinks.map((entry) => (
+                            <NavLink
+                                key={entry.to}
+                                className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}
+                                end={entry.to === "/"}
+                                to={entry.to}
+                            >
+                                {entry.label}
+                            </NavLink>
+                        ))}
+                    </nav>
+                    <div className="site-socials">
+                        {socialLinks.map((entry) => (
+                            <a
+                                key={entry.label}
+                                className="social-link"
+                                href={entry.href}
+                                rel="noreferrer"
+                                target="_blank"
+                            >
+                                {entry.label}
+                            </a>
+                        ))}
+                        <button className="social-link social-button" onClick={handleCopyEmail} type="button">
+                            Email
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </header>
+            <CopyToast show={showToast} />
+        </>
     );
 }
 

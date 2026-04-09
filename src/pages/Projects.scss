@@ -1,0 +1,45 @@
+.projects-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.projects-hero {
+    padding: 1.25rem 0 0;
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.project-entry {
+    align-items: center;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 1.4rem;
+}
+
+.project-entry h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: -0.04em;
+    margin: 0 0 0.5rem;
+}
+
+.project-entry-main {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.project-entry-side {
+    min-width: 7rem;
+}
+
+@media (max-width: 980px) {
+    .project-entry {
+        grid-template-columns: 1fr;
+    }
+}

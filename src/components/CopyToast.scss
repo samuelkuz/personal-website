@@ -1,0 +1,31 @@
+.copy-toast {
+    background: rgba(17, 17, 17, 0.94);
+    border-radius: 999px;
+    bottom: 1.5rem;
+    box-shadow: 0 12px 30px rgba(17, 17, 17, 0.18);
+    color: white;
+    font-size: 0.92rem;
+    left: 50%;
+    opacity: 0;
+    padding: 0.8rem 1rem;
+    pointer-events: none;
+    position: fixed;
+    transform: translate(-50%, 0.5rem);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    white-space: nowrap;
+    z-index: 80;
+}
+
+.copy-toast.visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+@media (max-width: 720px) {
+    .copy-toast {
+        bottom: 1rem;
+        max-width: calc(100vw - 2rem);
+        text-align: center;
+        white-space: normal;
+    }
+}

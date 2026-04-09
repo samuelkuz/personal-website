@@ -1,203 +1,171 @@
+.graph-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
 .map-wrapper {
-    font-family: arial,sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     margin: auto;
+    padding: 1.25rem;
+    position: relative;
     text-align: center;
-    height: 100%;
     width: 100%;
+}
+
+.map {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid var(--border-soft);
+    border-radius: calc(var(--radius-lg) - 6px);
+    margin: auto;
+    min-height: 32rem;
+    width: min(100%, 48rem);
+}
+
+.add-node-container,
+.edit-node-container,
+.edit-edge-container {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--border-soft);
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    margin: auto;
+    position: absolute;
+    text-align: center;
+}
+
+.add-node-container {
+    height: 72px;
+    padding: 0.5rem;
+    width: 112px;
+}
+
+.edit-node-container {
+    min-height: 188px;
+    padding: 0.85rem;
+    width: 196px;
+}
+
+.edit-edge-container {
+    min-height: 96px;
+    padding: 0.75rem;
+    width: 148px;
+}
+
+.add-node-title,
+.edit-node-title,
+.edit-edge-title {
+    font-weight: 700;
+    margin: 0.2rem 0 0.65rem;
+}
+
+.edit-node-title {
+    margin-bottom: 0.85rem;
+}
+
+.edit-edge-title {
+    margin-bottom: 0.85rem;
+}
+
+.add-node-submit,
+.edit-node-submit,
+.edit-edge-submit {
+    background: rgba(15, 23, 42, 0.92);
+    border-radius: 999px;
+    color: white;
+    font-weight: 700;
+    margin: 0.55rem auto 0;
+    padding: 0.45rem 0.75rem;
+    width: 84px;
+}
+
+.add-edge-container {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 0.45rem;
+}
+
+.add-edge-title {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.add-edge-container .input-box {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    color: var(--text-primary);
+    height: 34px;
+    outline: none;
+    padding: 0 0.65rem;
+    width: 88px;
+}
+
+.add-edge-container .input-box::placeholder {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.add-edge-container .input-box:focus {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
+}
+
+.edit-node-submit {
+    margin-top: 0.7rem;
+}
+
+.algorithm-selector-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+}
+
+.topological-error {
+    color: #b91c1c;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.graph-settings-title {
+    color: var(--text-primary);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.8rem;
+    margin: 1.4rem auto 0.9rem;
+}
+
+.graph-settings-container {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0 auto;
+    max-width: 48rem;
+}
+
+.graph-settings-item {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 1rem;
+}
+
+@media (max-width: 720px) {
+    .graph-settings-container {
+        grid-template-columns: 1fr;
+    }
 
     .map {
-        margin: auto;
-        border: 2px solid black;
-        height: 40%;
-        width: 40%;
-    }
-
-    .add-node-container {
-        background-color: #c5c5c5;
-        border-radius: 15px;
-        cursor: pointer;
-        margin: auto;
-        position: absolute;
-        text-align: center;
-
-        height: 60px;
-        width: 100px;
-        
-        .add-node-title {
-            font-weight: 500;
-            margin: 5px 0 10px 0;
-        }
-
-        .add-node-submit {
-            background-color: #9c9c9c;
-            border-radius: 5px;
-            font-weight: 500;
-            margin: 10px auto;
-
-            height: 20px;
-            width: 80px;
-
-            &:hover {
-                box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-                background-color: #000000;
-                border: 1px solid #a7a7a7;
-                color: #d6d6d6;
-            }
-        }
-    }
-
-    .edit-node-container {
-        background-color: #c5c5c5;
-        border-radius: 15px;
-        cursor: pointer;
-        font-weight: 500;
-        margin: auto;
-        position: absolute;
-        text-align: center;
-
-        height: 115px;
-        width: 150px;
-        
-        .edit-node-title {
-            margin: 5px 0 5px 0;
-        }
-
-        .add-edge-container {
-            .add-edge-title {
-                display: inline-block;
-                margin: 0px 5px;
-                text-align: left;
-            }
-
-            .input-box {
-                height: 20px;
-                width: 60px;
-                border: 1px solid transparent;
-                border-bottom: 1px solid #e8eaed;
-                margin-bottom: 3px;
-            }
-        }
-
-        .edit-node-submit {
-            background-color: #9c9c9c;
-            border-radius: 5px;
-            font-weight: 500;
-            margin: 5px auto;
-
-            height: 20px;
-            width: 80px;
-
-            &:hover {
-                box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-                background-color: #000000;
-                color: #d6d6d6;
-            }
-        }
-    }
-
-    .edit-edge-container {
-        background-color: #c5c5c5;
-        border-radius: 15px;
-        cursor: pointer;
-        font-weight: 500;
-        margin: auto;
-        position: absolute;
-        text-align: center;
-
-        height: 60px;
-        width: 100px;
-        
-        .edit-edge-title {
-            margin: 5px 0 5px 0;
-        }
-
-        .edit-edge-submit {
-            background-color: #9c9c9c;
-            border-radius: 5px;
-            font-weight: 500;
-            margin: 5px auto;
-
-            height: 20px;
-            width: 80px;
-
-            &:hover {
-                box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-                background-color: #000000;
-                color: #d6d6d6;
-            }
-        }
-    }
-
-    .algorithm-selector-container {
-        display: flex;
-
-        .algorithm-button-submit {
-            background-color: #9c9c9c;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 500;
-            margin: 3px auto;
-            text-align: center;
-            user-select: none;
-            
-            height: 20px;
-            width: 100px;
-    
-            &:hover {
-                box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-                background-color: #000000;
-                color: #d6d6d6;
-            }
-        }
-
-        .algorithm-selector-button {
-            background-color: #f8f9fa;
-            border: 1px solid #dadce0;
-            border-radius: 4px;
-            color: #3c4043;
-            font-size: 14px;
-            margin: 10px auto;
-            line-height: 25px;
-            height: 25px;
-            min-width: 100px;
-            text-align: center;
-            cursor: pointer;
-            user-select: none;
-            
-            &:hover {
-                box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-                background-color: #f8f9fa;
-                border: 1px solid #a7a7a7;
-                color: #202124;
-            }
-        }
-    }
-
-    .topological-error {
-        margin-bottom: 10px;
-        font-size: 28px;
-        color: #ac0000;
-    }
-
-    .graph-settings-title {
-        border-bottom: 1px solid #212529;
-        color: #212529;
-        font-size: 28px;
-        margin: 10px auto;
-        width: 110px;
-    }
-
-    .graph-settings-container {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-        margin: auto;
-
-        .graph-settings-item {
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            color: #212529;
-            font-size: 20px;
-            margin: 5px 15px 25px;;
-        }
+        min-height: 24rem;
+        width: 100%;
     }
 }
